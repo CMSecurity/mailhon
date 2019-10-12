@@ -12,6 +12,9 @@ class CustomHostnameController(Controller):
 
 
 async def amain(loop):
+    # TODO: Add custom handlers for DATA and stuff (i.e. RCP)
+    # see https://aiosmtpd.readthedocs.io/en/latest/aiosmtpd/docs/controller.html#using-the-controller
+    # and handlers: https://aiosmtpd.readthedocs.io/en/latest/aiosmtpd/docs/handlers.html#handler-hooks
     cont = CustomHostnameController(Sink(),port=8025)
     cont.start()
 
