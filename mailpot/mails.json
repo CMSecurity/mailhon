@@ -1,0 +1,5 @@
+{"src_ip": "::1", "src_port": 44044, "eventid": "mailhon.ehlo", "hostname": "[127.0.1.1]"}
+{"src_ip": "::1", "src_port": 44044, "eventid": "mailhon.data", "envelope_from": "anne@example.com", "envelope_to": ["bart@example.com"], "envelope_data": "From: anne@example.com\r\nTo: bart@example.com\r\nSubject: A test\r\ntesting\r\n"}
+{"src_ip": "::1", "src_port": 44050, "eventid": "mailhon.ehlo", "hostname": "lo.l"}
+{"src_ip": "::1", "src_port": 44050, "eventid": "mailhon.data", "envelope_from": "me@l.l", "envelope_to": ["a@l.l", "a@g.g"], "envelope_data": "hey hey\r\n"}
+{"src_ip": "::1", "src_port": 44056, "eventid": "mailhon.ehlo", "hostname": "l.l"}

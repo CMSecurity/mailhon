@@ -6,6 +6,10 @@ from aiosmtpd.controller import Controller
 from aiosmtpd.handlers import Sink
 from aiosmtpd.smtp import SMTP as Server, syntax
 
+from servers.logger import Logger
+
+
+log = Logger()
 
 class HoneyExim(Server):
     EMPTYBYTES = b''
@@ -100,30 +104,31 @@ class HoneyExim(Server):
 
 class HoneyEximHandler:
     async def handle_HELO(self, server, session, envelope, hostname):
-        print('Incoming hostname: %s' % hostname)
+        log.info(session, "mailhon.helo", hostname=hostname)
         session.host_name = hostname
         return '250 {}'.format(server.hostname)
 
     async def handle_EHLO(self, server, session, envelope, hostname):
-        print('Incoming hostname: %s' % hostname)
+        log.info(session, "mailhon.ehlo", hostname=hostname)
         session.host_name = hostname
         await server.push('250-PIPELINING')
         return '250 HELP'
 
-    async def handle_VRFY(self, server, session, envelope, address):
-        print('Client tried to verify address: %s' % address)
+    # async def handle_VRFY(self, server, session, envelope, address):
+    #     log.info(session, "mailhon.vrfy", address=address)
 
-    async def handle_RCPT(self, server, session, envelope, address, options):
-        envelope.rcpt_options.extend(options)
-        envelope.rcpt_tos.append(address)
-        return '250 Accepted'
+    # async def handle_MAIL(self, server, session, envelope, address, mail_options):
+    #     log.info(session, "mailhon.mail_from", address=address)
+    #     envelope.mail_from = str(address)
+
+    # async def handle_RCPT(self, server, session, envelope, address, options):
+    #     log.info(session, "mailhon.rcpt", address=address)
+    #     envelope.rcpt_tos.append(address)
+    #     return '250 Accepted'
+
 
     async def handle_DATA(self, server, session, envelope):
-        print('Message from %s' % envelope.mail_from)
-        print('Message for %s' % envelope.rcpt_tos)
-        print('Message data:\n')
-        print(envelope.content.decode('utf8', errors='replace'))
-        print('End of message')
+        log.info(session, "mailhon.data", envelope_from=envelope.mail_from, envelope_to=envelope.rcpt_tos, envelope_data=envelope.content.decode('utf8', errors='replace'))
         return '250 OK' # TODO: Exim returns "250 OK id=MESSAGE_ID"
         # see https://www.exim.org/exim-html-current/doc/html/spec_html/ch-how_exim_receives_and_delivers_mail.html
 
