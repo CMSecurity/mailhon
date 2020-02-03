@@ -15,6 +15,6 @@ Afterwards, the venv can either be activated (`source venv/bin/activate`) or use
 With your environment prepared, run `python mailpot/server.py`. All interaction will be logged in `mails.json`.
 
 ## Open TODOs
-- [] Introduce config  
-- [] Send n number of mails out before nulling them (trick live checks)  
-- [] Add more mailservers  
+- [ ] Introduce config  
+- [ ] Send n number of mails out before nulling them (trick live checks)  
+- [ ] Add more mailservers  
