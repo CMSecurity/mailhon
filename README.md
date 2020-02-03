@@ -12,4 +12,9 @@ To install the requirements into the newly created venv, run `venv/bin/pip insta
 Afterwards, the venv can either be activated (`source venv/bin/activate`) or used directly to run the server (`venv/bin/python mailpot/server.py`).
 
 ## Running Mailhon
-With your environment prepared, run `python mailpot/server.py`. All logged interaction will be placed in a `mails.json` logfile.
+With your environment prepared, run `python mailpot/server.py`. All interaction will be logged in `mails.json`.
+
+## Open TODOs
+- [] Introduce config  
+- [] Send n number of mails out before nulling them (trick live checks)  
+- [] Add more mailservers  
