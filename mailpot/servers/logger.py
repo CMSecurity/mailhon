@@ -1,5 +1,7 @@
 import json
 import logging
+from datetime import datetime, timezone
+
 
 class StructuredMessage(object):
     def __init__(self, **kwargs):
@@ -14,7 +16,6 @@ class Logger():
     _ = StructuredMessage
     def __init__(self):
         if not Logger.is_initialized:
-            # logging.basicConfig(level=logging.INFO, format='%(message)s')
             Logger.is_initialized = True
             logger = logging.getLogger()
             logger.setLevel(logging.INFO)
@@ -33,4 +34,10 @@ class Logger():
 
 
     def info(self, session, eventid, **kwargs):
-            logging.warn(Logger._(src_ip=session.peer[0], src_port=session.peer[1], eventid=eventid, **kwargs))
+            logging.warn(Logger._(
+                timestamp=datetime.now().isoformat(),
+                src_ip=session.peer[0],
+                src_port=session.peer[1],
+                eventid=eventid,
+                **kwargs
+            ))
